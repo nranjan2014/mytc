@@ -29,29 +29,35 @@ class InternetSecurity {
 
 vector <string> InternetSecurity::determineWebsite(vector <string> address, vector <string> keyword, vector <string> dangerous, int threshold)
 {
-    int i, j, k, l, m, n;
+    int i, j, k, l, m, n, g;
     SVec key;
     SVec temp;
     SVec ret;
     string s;
-    int count;
+    int count, co, ex;
     count =0;
     l =0;
+    co = 0;
+    int numdan =1;
     istringstream ss;
     int dan;
-
-while ( (numdan <= address.size()) || (dan == 0) || () )
+    
+     
+while ( (ret.size() < address.size()) && (numdan > 0) )
 {
+    numdan = 0;
     for ( i = 0; i < address.size(); i++)
     {
+            cout << "address: " << address[i] << endl;
         dan = 0;
         l = 0;
         ss.clear();
-        key.clear();
+       // key.clear();
         ss.str(keyword[i]);
         while( ss >> s)
         {
-            key.push_back(s);    
+            key.push_back(s);  
+            cout << "Key: " << s << endl;
             ss.clear();
         }
         temp.clear();
@@ -69,6 +75,7 @@ while ( (numdan <= address.size()) || (dan == 0) || () )
             if (g == 0 )
             {
                 temp.push_back(key[j]);
+                cout << "Key dan: " << key[j] << endl;
             }
         }
         if ( l >= threshold)
@@ -96,26 +103,21 @@ while ( (numdan <= address.size()) || (dan == 0) || () )
                if ( co == 0)
                {
                    ret.push_back(address[i]);
+                   cout << "ret: " << address[i] << endl;
+                   numdan++;
                }
            }
            else 
            {
+               cout << "ret: " << address[i] << endl;
                ret.push_back(address[i]);
+               numdan++;
            }
-           numdan++;
         }
+        key.clear();
     }
 }
-
-
-if( !(ret.empty()))
-{
     return(ret);
-}
-else
-{
-    return(ret);
-}
 }
 
 
