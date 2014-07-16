@@ -21,6 +21,7 @@ using namespace std;
 #define OVEC(v) { int iii; VIT(iii, v) cout << v[iii] << " " ; cout << endl; }
 
 typedef vector <string> SVec;
+typedef set <int> SSet;
 
 class InternetSecurity {
     public:
@@ -29,94 +30,87 @@ class InternetSecurity {
 
 vector <string> InternetSecurity::determineWebsite(vector <string> address, vector <string> keyword, vector <string> dangerous, int threshold)
 {
-    int i, j, k, l, m, n, g;
+    int i, j, k, l, m,n,  g;
     SVec key;
     SVec temp;
     SVec ret;
+    SSet retn;
+    set<int>::iterator it;
     string s;
-    int count, co, ex;
-    count =0;
     l =0;
-    co = 0;
     int numdan =1;
     istringstream ss;
     int dan;
-    
-     
-while ( (ret.size() < address.size()) && (numdan > 0) )
-{
-    numdan = 0;
-    for ( i = 0; i < address.size(); i++)
+
+
+    while ( (retn.size() < address.size()) && (numdan > 0) )
     {
-            cout << "address: " << address[i] << endl;
-        dan = 0;
-        l = 0;
-        ss.clear();
-       // key.clear();
-        ss.str(keyword[i]);
-        while( ss >> s)
+        numdan = 0;
+        for ( i = 0; i < address.size(); i++)
         {
-            key.push_back(s);  
-            cout << "Key: " << s << endl;
+            dan = 0;
+            l = 0;
             ss.clear();
-        }
-        temp.clear();
-        for ( j = 0; j < key.size(); j++)
-        {
-            g = 0;
-            for ( k = 0; k < dangerous.size(); k++)
+            ss.str(keyword[i]);
+            while( ss >> s)
             {
-                if ( key[j] == dangerous[k])
+                key.push_back(s);  
+                ss.clear();
+            }
+            temp.clear();
+            for ( j = 0; j < key.size(); j++)
+            {
+                g = 0;
+                for ( k = 0; k < dangerous.size(); k++)
                 {
-                    l++;
-                    g++; // for that key to be dangerous keyword
+                    if ( key[j] == dangerous[k])
+                    {
+                        l++;
+                        g++; // for that key to be dangerous keyword
+                    }
+                }
+                if (g == 0 )
+                {
+                    temp.push_back(key[j]);
                 }
             }
-            if (g == 0 )
+            if ( l >= threshold)
             {
-                temp.push_back(key[j]);
-                cout << "Key dan: " << key[j] << endl;
-            }
-        }
-        if ( l >= threshold)
-        {
-            if( !(temp.empty()))
-            {
-                for ( m = 0; m < temp.size(); m++)
+                if( !(temp.empty()))
                 {
-                    dangerous.push_back(temp[m]);
+                    for ( m = 0; m < temp.size(); m++)
+                    {
+                        dangerous.push_back(temp[m]);
+                    }
+                }
+                dan = 1;
+            }
+            if ( dan > 0)
+            {
+                if ( !(retn.empty()))
+                {
+                    it = retn.find(i);
+                    if ( it == retn.end())
+                    {
+                        retn.insert(i);
+                        numdan++;
+                    }
+                }
+                else 
+                {
+                    retn.insert(i);
+                    numdan++;
                 }
             }
-            dan = 1;
+            key.clear();
         }
-        if ( dan > 0)
-        {
-           if ( !(ret.empty()))
-           {
-               for ( ex = 0; ex < ret.size(); ex++)
-               {
-                  if ( address[i] == ret[ex])
-                  {
-                    co++; // counter for ret 
-                  }
-               }
-               if ( co == 0)
-               {
-                   ret.push_back(address[i]);
-                   cout << "ret: " << address[i] << endl;
-                   numdan++;
-               }
-           }
-           else 
-           {
-               cout << "ret: " << address[i] << endl;
-               ret.push_back(address[i]);
-               numdan++;
-           }
-        }
-        key.clear();
     }
-}
+
+    for ( it = retn.begin(); it != retn.end(); it++)
+    {
+        n = *it;
+        ret.push_back(address[n]);
+    }
     return(ret);
 }
 
