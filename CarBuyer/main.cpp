@@ -46,15 +46,15 @@ int main(int argc, char **argv)
     cars.push_back("8426 774 19");
     cars.push_back("29709 325 31");
     cars.push_back("30783 853 68");
-    cars.push_back();
+    cars.push_back("20796 781 3 ");
     cars.push_back("27726 4 81");
     cars.push_back("20788 369 69");
     cars.push_back("17554 359 34");
-    cars.push_back();
+    cars.push_back("12039 502 24");
     cars.push_back("6264 230 69");
     cars.push_back("14151 420 65");
     cars.push_back("25115 528 70");
-    cars.push_back();
+    cars.push_back("22234 719 55");
     cars.push_back("2050 926 40");
     cars.push_back("18618 714 29");
     cars.push_back("173 358 57");

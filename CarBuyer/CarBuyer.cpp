@@ -1,4 +1,5 @@
 #include <string>
+#include <sstream>
 #include <vector>
 #include <list>
 #include <algorithm>
@@ -7,17 +8,9 @@
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
+
 using namespace std;
 
-#define VIT(i, v) for (i = 0; i < v.size(); i++) 
-#define IT(it, ds) for (it = ds.begin(); it != ds.end(); it++)
-#define FUP(i, n) for (i = 0; i < n; i++)
-
-#define O1(v) cout << v << endl
-#define O2(v1, v2) cout << v1 << " " << v2 << endl
-#define O3(v1, v2, v3) cout << v1 << " " << v2 << " " << v3 << endl
-#define OVEC(v) { int iii; VIT(iii, v) cout << v[iii] << " " ; cout << endl; }
-typedef vector <string> SVec;
 
 class CarBuyer {
   public:
@@ -26,6 +19,21 @@ class CarBuyer {
 
 double CarBuyer::lowestCost(vector <string> cars, int fuelPrice, int annualDistance, int years)
 {
-  int i;
+    int i;
+    istringstream ss;
+    double price, tax, eff, total;
+     vector < double > sum;
+        total = 0;
+    for ( i =0; i < cars.size(); i++ )
+    {
+        ss.clear();
+        ss.str(cars[i]);
+        ss >> price >> tax >> eff;
 
+       total = price + ( tax * years) + ( (years * fuelPrice * annualDistance) / eff);
+        sum.push_back(total);
+    }
+    sort(sum.begin(), sum.end());
+
+    return (sum[0]);
 }
