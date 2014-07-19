@@ -17,18 +17,31 @@ using namespace std;
 #define O1(v) cout << v << endl
 #define O2(v1, v2) cout << v1 << " " << v2 << endl
 #define O3(v1, v2, v3) cout << v1 << " " << v2 << " " << v3 << endl
-#define OVEC(v) { int iii; VIT(iii, v) cout << v[iii] << " " ; cout << endl; }
 
-typedef map<int, string> ISmap;
-typedef map<int, int> IImap;
-typedef map<string, int> SImap;
-typedef map<string, string> SSmap;
+class ColorfulBricks {
+    public:
+        int countLayouts(string bricks);
+};
 
-typedef ISmap::iterator ISmit;
-typedef IImap::iterator IImit;
-typedef SSmap::iterator SSmit;
-typedef SImap::iterator SImit;
+int ColorfulBricks::countLayouts(string bricks)
+{
+    int i;
+    set <char> S;
 
-typedef vector <int> IVec;
-typedef vector <double> DVec;
-typedef vector <string> SVec;
+    for (i = 0; i< bricks.size(); i++)
+    {
+        S.insert(bricks[i]);
+    }
+    if (S.size() == 1) 
+    {
+        return(1);
+    }
+    else if ( S.size() == 2)
+    {
+        return(2);
+    }
+    else
+    {
+        return(0);
+    }
+}
